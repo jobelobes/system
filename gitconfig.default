@@ -1,0 +1,41 @@
+# This is Git's per-user configuration file.
+[user]
+    name = Jonathan Lobaugh
+    email = jlobaugh@blueorigin.com
+
+[alias]
+    # Get the current branch name
+    branch-name = "!git rev-parse --abbrev-ref HEAD"
+
+	# one-line log
+	l = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h - %C(green)(%ar) %C(reset)%s - %C(dim blue)%an%C(yellow)%d%C(reset)'
+    
+    # commit 
+    a = add
+    c = commit --verbose
+    cm = commit -m
+    m = commit --amend --verbose
+
+    d = diff
+
+    st = status
+    co = checkout
+
+    # list branches sorted by last modified
+    b = "!git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD) %(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:blue)%(subject)%(color:reset)'‌​ | column -t -s '|'"
+
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
+
+    # list tracked files
+    tracked = ls-tree -r HEAD --name-only
+    untracked = ls-files -o --exclude-standard
+
+    # reset to origin
+    p = "!git fetch --all && git reset --hard origin/$(git branch-name)"
+    purge = "!git fetch --all && git reset --hard origin/$(git branch-name)"
+
+[push]
+	default = current
+[core]
+	editor = vim
