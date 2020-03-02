@@ -1,14 +1,15 @@
 [user]
-	name = Jonathan Lobaugh
-	email = jobelobes@gmail.com
+    name = Jonathan Lobaugh
+    email = jobelobes@gmail.com
 
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
     
 [alias]
     # tooling function
     branch-name = "!git rev-parse --abbrev-ref HEAD"
 
+    # quick renames
     a = add
     ac = !git add . && git commit -am
     c = commit --verbose
@@ -25,7 +26,7 @@
     co = checkout
     cob = checkout -b
 
-    # one-line log
+    # one-line logging
     l = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(red)%d\\ %Creset%s%C(blue)\\ [%cn]" --decorate --date=short
 
     # list branches sorted by last modified
@@ -49,3 +50,4 @@
 
 [core]
 	editor = vim
+
