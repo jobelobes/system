@@ -1,41 +1,51 @@
-# This is Git's per-user configuration file.
 [user]
-    name = Jonathan Lobaugh
-    email = jlobaugh@blueorigin.com
+	name = Jonathan Lobaugh
+	email = jobelobes@gmail.com
 
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+    
 [alias]
-    # Get the current branch name
+    # tooling function
     branch-name = "!git rev-parse --abbrev-ref HEAD"
 
-	# one-line log
-	l = log --graph --abbrev-commit --decorate --format=format:'%C(blue)%h - %C(green)(%ar) %C(reset)%s - %C(dim blue)%an%C(yellow)%d%C(reset)'
-    
-    # commit 
     a = add
+    ac = !git add . && git commit -am
     c = commit --verbose
+    ca = commit -a --verbose
     cm = commit -m
+    cam = commit -a -m
     m = commit --amend --verbose
 
     d = diff
+    ds = diff --stat
+    dc = diff --cached
 
     st = status
     co = checkout
+    cob = checkout -b
+
+    # one-line log
+    l = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(red)%d\\ %Creset%s%C(blue)\\ [%cn]" --decorate --date=short
 
     # list branches sorted by last modified
-    b = "!git for-each-ref --sort=-committerdate refs/heads --format='%(HEAD) %(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:blue)%(subject)%(color:reset)'‌​ | column -t -s '|'"
+    b = "!git for-each-ref --sort=-committerdate --color=always refs/heads --format='%(HEAD) %(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:blue)%(subject)%(color:reset)'‌​ | column -t -s '|'"
 
     # list aliases
     la = "!git config -l | grep alias | cut -c 7-"
 
-    # list tracked files
-    tracked = ls-tree -r HEAD --name-only
-    untracked = ls-files -o --exclude-standard
+    # purge branch of all changes and match to remote
+    p = "!git purge"
+    purge = "!git fetch --all && git reset --hard origin/$(git branch-name) && git clean -f"
 
-    # reset to origin
-    p = "!git fetch --all && git reset --hard origin/$(git branch-name)"
-    purge = "!git fetch --all && git reset --hard origin/$(git branch-name)"
+    # Push and track the branch to remote
+    publish = "!git push -u origin $(git branch-name)"
+
+    # Delete the remote version of the current branch
+    unpublish = "!git push origin :$(git branch-name)"
 
 [push]
 	default = current
+
 [core]
 	editor = vim
