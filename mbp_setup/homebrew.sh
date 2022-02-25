@@ -11,6 +11,7 @@ brew tap "homebrew/cask"
 brew tap "homebrew/cask-fonts"
 
 # Misc
+brew install zsh
 brew install --cask appcleaner
 brew install --cask raycast
 brew install --cask brave-browser
