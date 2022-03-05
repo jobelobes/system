@@ -32,6 +32,7 @@ brew install kubernetes-cli
 brew install --cask iterm2
 brew install --cask visual-studio-code
 brew install --cask docker
+brew install --cask postman
 
 # Cleanup Cache
 brew cleanup -s
