@@ -1,53 +1,34 @@
 [user]
-    name = Jonathan Lobaugh
-    email = jobelobes@gmail.com
-
-[url "git@github.com:"]
-    insteadOf = https://github.com/
-    
-[alias]
-    # tooling function
-    branch-name = "!git rev-parse --abbrev-ref HEAD"
-
-    # quick renames
-    a = add
-    ac = !git add . && git commit -am
-    c = commit --verbose
-    ca = commit -a --verbose
-    cm = commit -m
-    cam = commit -a -m
-    m = commit --amend --verbose
-
-    d = diff
-    ds = diff --stat
-    dc = diff --cached
-
-    st = status
-    co = checkout
-    cob = checkout -b
-
-    # one-line logging
-    l = log --pretty=format:"%C(yellow)%h\\ %C(green)%ad%C(red)%d\\ %Creset%s%C(blue)\\ [%cn]" --decorate --date=short
-
-    # list branches sorted by last modified
-    b = "!git for-each-ref --sort=-committerdate --color=always refs/heads --format='%(HEAD) %(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:blue)%(subject)%(color:reset)'‌​ | column -t -s '|'"
-
-    # list aliases
-    la = "!git config -l | grep alias | cut -c 7-"
-
-    # purge branch of all changes and match to remote
-    p = "!git purge"
-    purge = "!git fetch --all && git reset --hard origin/$(git branch-name) && git clean -f"
-
-    # Push and track the branch to remote
-    publish = "!git push -u origin $(git branch-name)"
-
-    # Delete the remote version of the current branch
-    unpublish = "!git push origin :$(git branch-name)"
-
+	name = Jonathan Lobaugh
+	email = jobelobes@gmail.com
+[core]
+	editor = /usr/bin/vim
 [push]
 	default = current
-
-[core]
-	editor = vim
-
+[alias]
+	branch-name = !git rev-parse --abbrev-ref HEAD
+	a = add
+	ac = !git add . && git commit -am
+	c = commit --verbose
+	ca = commit -a --verbose
+	cm = commit -m
+	cam = commit -a -m
+	m = commit --amend --verbose
+	d = diff
+	ds = diff --stat
+	dc = diff --cached
+	st = status
+	co = checkout
+	cob = checkout -b
+	l = log --decorate --date=short --pretty=format:'%C(yellow)%h %C(green)%ad%C(red)%d %Creset%s%C(blue) [%cn]'
+	tree = log --graph --full-history --all --color --date=short --pretty=format:'%C(yellow)%h %C(green)%ad%C(red)%d %Creset%s%C(blue) [%cn]'
+	b = !git for-each-ref --sort=-committerdate --color=always refs/heads --format='%(HEAD) %(color:yellow)%(refname:short)|%(color:green)%(committerdate:relative)|%(color:blue)%(subject)%(color:reset)' | column -t -s '|'
+	p = !git purge
+	purge = !git fetch --all && git reset --hard origin/$(git branch-name) && git clean -f
+	publish = !git push -u origin $(git branch-name)
+	unpublish = !git push origin :$(git branch-name)
+	cleanup = !git remote prune origin && git repack && git prune-packed && git reflog expire --expire=1.month.ago && git gc --aggressive
+[init]
+	defaultBranch = main
+[pill]
+	rebase = false
